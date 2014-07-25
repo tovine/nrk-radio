@@ -1,0 +1,14 @@
+ _nrk_radio()
+{
+        local COMPLETES
+	
+	if [[ $COMP_CWORD > 1 ]]; then
+		COMPLETES=()
+	else
+		COMPLETES="p1 p1p p13 p2 p3 mp3 super an sport sami urort klassisk jazz folk pyro rr rap status stopp"
+	fi
+
+	COMPREPLY=( $(compgen -W "$COMPLETES" -- ${COMP_WORDS[$COMP_CWORD]}) )
+	return 0
+}
+complete -F _nrk_radio nrk /usr/local/bin/nrk

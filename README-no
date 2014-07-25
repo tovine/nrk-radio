@@ -1,0 +1,18 @@
+NRK Radio helper
+================
+Prerequisites:
+--------------
+For at scriptet skal virke må følgende være installert:
+- screen
+- mplayer
+
+Installasjon:
+-------------
+I utgangspunktet kan det legges hvor som helst, men for best opplevelse bør scriptet ('nrk') ligge et sted som er inkludert i $PATH - f.eks. /usr/local/bin/
+
+(Frivillig)
+For å få autocomplete kan 'nrk_bash-autocomplete' sources ved innlogging (f.eks. med .bashrc e.l.) eller legges sammen med de andre autocomplete-definisjonene i /etc/bash_completion.d/ (for hele systemet) eller ~/.bash_completion.d/ (kun for gjeldende bruker).
+
+Avinstallasjon:
+---------------
+Slett filene du la inn - duh...

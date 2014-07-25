@@ -1,0 +1,22 @@
+NRK Radio helper
+================
+Prerequisites:
+--------------
+For the script to work, the following must be installed:
+- screen	(used to keep it running in the background)
+- mplayer	(used to actually do the playback)
+
+Other binaries are also used, but I consider them basic utilities (e.g. tee, grep, cut) in any Linux environment...
+
+Installation:
+-------------
+You can basically put it anywhere you want, but in order to get the best experience, the main script ('nrk') should be located somewhere that's included in the $PATH - e.g. /usr/local/bin/ (alternatively you could use an alias - but you get the idea...)
+
+(Optional)
+To get channel autocompletion, include the 'nrk_bash-autocomplete' file. Either by sourcing the file (from .bashrc etc...), or by placing it with the other autocomplete-definitions in /etc/bash_completion.d/ (system-wide) or ~/.bash_completion.d/ (user-local).
+
+Instructions are based on a standard Debian install, but should also work on most others - anyway I assume you know how to make it work if you run a distro where this doesn't...
+
+Uninstallation:
+---------------
+Delete the files you downloaded - duh...
