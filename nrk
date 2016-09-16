@@ -3,6 +3,7 @@
 # - Torbjørn
 
 LOGFILE=$HOME/radiolog.tmp
+PLAYER=mplayer
 
 case $1 in
 	p1|P1)
@@ -85,14 +86,14 @@ case $1 in
 		head -n 1 $LOGFILE
 		tail -n 1 $LOGFILE | grep ICY | cut -d "'" -f 2
 	    fi
-	    exit 0 
+	    exit 0
 	    ;;
 	*)
 	    echo "Hør på NRK direktestreaming.
 	    Bruk: nrk [kanal]
 	    Tilgjengelige kanaler: p1, p1p (P1+), p13, p2, p3, mp3, super, an (Alltid Nyheter), sport, sami, urort, klassisk, jazz, folk, pyro, rr (Alltid RadioResepsjonen), rap (National Rap Show)
 
-	    'nrk status' viser kanal og program/sang (hvis tilgjengelig) 
+	    'nrk status' viser kanal og program/sang (hvis tilgjengelig)
 	    'nrk stopp' stopper avspilling - enjoy!"
 	    exit 0
 
@@ -109,4 +110,4 @@ rm $LOGFILE 2> /dev/null
 echo $MSG | tee $LOGFILE
 
 # Start avspilling i screen mens metadata-output sendes til loggfilen
-screen -dmS nrk bash -c "mplayer $URL | tee | grep ICY --line-buffered >> $LOGFILE"
+screen -dmS nrk bash -c "$PLAYER $URL | tee | grep ICY --line-buffered >> $LOGFILE"
