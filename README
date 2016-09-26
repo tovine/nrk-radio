@@ -4,7 +4,7 @@ Prerequisites:
 --------------
 For the script to work, the following must be installed:
 - screen	(used to keep it running in the background)
-- mplayer	(used to actually do the playback)
+- mplayer	(used to actually do the playback, you can also use any other player if you like as long as it accepts playing from HTTP URLs)
 
 Other binaries are also used, but I consider them basic utilities (e.g. tee, grep, cut) in any Linux environment...
 
@@ -16,6 +16,10 @@ You can basically put it anywhere you want, but in order to get the best experie
 To get channel autocompletion, include the 'nrk_bash-autocomplete' file. Either by sourcing the file (from .bashrc etc...), or by placing it with the other autocomplete-definitions in /etc/bash_completion.d/ (system-wide) or ~/.bash_completion.d/ (user-local).
 
 Instructions are based on a standard Debian install, but should also work on most others - anyway I assume you know how to make it work if you run a distro where this doesn't...
+
+Configuration:
+--------------
+If you want to change which media playback program you want to use, edit the variable PLAYER at the top of the script.
 
 Uninstallation:
 ---------------
