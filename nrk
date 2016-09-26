@@ -70,10 +70,6 @@ case $1 in
 	    MSG="Hører nå på NRK Folkemusikk"
 	    URL="http://lyd.nrk.no/nrk_radio_folkemusikk_mp3_h"
 	    ;;
-	pyro|Pyro|PYRO)
-	    MSG="Hører nå på NRK Pyro"
-	    URL="http://lyd.nrk.no/nrk_radio_p3_pyro_mp3_h"
-	    ;;
 	stop|stopp)
 	    echo "Stopper avspilling"
 	    screen -S nrk -X quit
@@ -91,7 +87,7 @@ case $1 in
 	*)
 	    echo "Hør på NRK direktestreaming.
 	    Bruk: nrk [kanal]
-	    Tilgjengelige kanaler: p1, p1p (P1+), p13, p2, p3, mp3, super, an (Alltid Nyheter), sport, sami, urort, klassisk, jazz, folk, pyro, rr (Alltid RadioResepsjonen), rap (National Rap Show)
+	    Tilgjengelige kanaler: p1, p1p (P1+), p13, p2, p3, mp3, super, an (Alltid Nyheter), sport, sami, urort, klassisk, jazz, folk, rr (Alltid RadioResepsjonen), rap (National Rap Show)
 
 	    'nrk status' viser kanal og program/sang (hvis tilgjengelig)
 	    'nrk stopp' stopper avspilling - enjoy!"
@@ -110,4 +106,4 @@ rm $LOGFILE 2> /dev/null
 echo $MSG | tee $LOGFILE
 
 # Start avspilling i screen mens metadata-output sendes til loggfilen
-screen -dmS nrk bash -c "$PLAYER $URL | tee | grep ICY --line-buffered >> $LOGFILE"
+screen -dmS nrk bash -c "$PLAYER $URL | tee 2> $LOGFILE | grep ICY --line-buffered >> $LOGFILE"
