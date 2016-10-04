@@ -3,7 +3,8 @@
 # - Torbjørn
 
 LOGFILE=$HOME/radiolog.tmp
-PLAYER=mplayer
+LASTPLAYED=$HOME/radiolastplayed.tmp
+PLAYER="mpv --no-video"
 
 case $1 in
 	p1|P1)
@@ -77,6 +78,12 @@ case $1 in
 	    rm $LOGFILE 2> /dev/null
 	    exit 0
 	    ;;
+    resume)
+        echo "Fortsetter avspilling"
+        MSG=$(head -n 1 $LASTPLAYED)
+        URL=$(tail -n 1 $LASTPLAYED)
+        ;;
+
 	status)
 	    if [ -e $LOGFILE ]; then
 		head -n 1 $LOGFILE
@@ -104,6 +111,9 @@ fi
 rm $LOGFILE 2> /dev/null
 # Sett inn header i loggfil (brukes til å vise hvilken kanal som spilles av)
 echo $MSG | tee $LOGFILE
+echo $MSG > $LASTPLAYED
+echo $URL >> $LASTPLAYED
+
 
 # Start avspilling i screen mens metadata-output sendes til loggfilen
 screen -dmS nrk bash -c "$PLAYER $URL | tee 2> $LOGFILE | grep ICY --line-buffered >> $LOGFILE"
