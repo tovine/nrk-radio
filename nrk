@@ -8,67 +8,67 @@ PLAYER="mpv --no-video"
 
 case $1 in
 	p1|P1)
-	    MSG="Hører nå på NRK P1"
+	    MSG="Hører på NRK P1"
 	    URL="http://lyd.nrk.no/nrk_radio_p1_trondelag_mp3_h"
 	    ;;
 	p1p|p1+|P1+|P1P|P1p|p1P)
-	    MSG="Hører nå på NRK P1+"
+	    MSG="Hører på NRK P1+"
 	    URL="http://lyd.nrk.no/nrk_radio_p1pluss_mp3_h"
 	    ;;
 	p13|P13)
-	    MSG="Hører nå på NRK P13"
+	    MSG="Hører på NRK P13"
 	    URL="http://lyd.nrk.no/nrk_radio_p13_mp3_h"
 	    ;;
 	p2|P2)
-	    MSG="Hører nå på NRK P2"
+	    MSG="Hører på NRK P2"
 	    URL="http://lyd.nrk.no/nrk_radio_p2_mp3_h"
 	    ;;
 	p3|P3|petre|PETRE)
-	    MSG="Hører nå på NRK P3"
+	    MSG="Hører på NRK P3"
 	    URL="http://lyd.nrk.no/nrk_radio_p3_mp3_h"
 	    ;;
 	mp3|Mp3|MP3)
-	    MSG="Hører nå på NRK mP3"
+	    MSG="Hører på NRK mP3"
 	    URL="http://lyd.nrk.no/nrk_radio_mp3_mp3_h"
 	    ;;
 	rap|NRS|nrs)
-	    MSG="Hører nå på NRK National Rap Show"
+	    MSG="Hører på NRK National Rap Show"
 	    URL="http://lyd.nrk.no/nrk_radio_p3_national_rap_show_mp3_h"
 	    ;;
 	rr|RR)
-	    MSG="Hører nå på NRK Alltid RadioResepsjonen"
+	    MSG="Hører på NRK Alltid RadioResepsjonen"
 	    URL="http://lyd.nrk.no/nrk_radio_p3_radioresepsjonen_mp3_h"
 	    ;;
 	super|Super|SUPER)
-	    MSG="Hører nå på NRK Super"
+	    MSG="Hører på NRK Super"
 	    URL="http://lyd.nrk.no/nrk_radio_super_mp3_h"
 	    ;;
 	an|AN|nyheter)
-	    MSG="Hører nå på NRK Alltid Nyheter"
+	    MSG="Hører på NRK Alltid Nyheter"
 	    URL="http://lyd.nrk.no/nrk_radio_alltid_nyheter_mp3_h"
 	    ;;
 	sport|Sport|SPORT)
-	    MSG="Hører nå på NRK Sport"
+	    MSG="Hører på NRK Sport"
 	    URL="http://lyd.nrk.no/nrk_radio_sport_mp3_h"
 	    ;;
 	sami)
-	    MSG="Hører nå på NRK Sàmi Radio"
+	    MSG="Hører på NRK Sàmi Radio"
 	    URL="http://lyd.nrk.no/nrk_radio_sami_mp3_h"
 	    ;;
 	urort|urørt|Urort|Urørt|URORT|URØRT)
-	    MSG="Hører nå på NRK Urørt"
+	    MSG="Hører på NRK Urørt"
 	    URL="http://lyd.nrk.no/nrk_radio_p3_urort_mp3_h"
 	    ;;
 	klassisk|Klassisk|KLASSISK)
-	    MSG="Hører nå på NRK Klassisk"
+	    MSG="Hører på NRK Klassisk"
 	    URL="http://lyd.nrk.no/nrk_radio_klassisk_mp3_h"
 	    ;;
 	jazz|Jazz|JAZZ)
-	    MSG="Hører nå på NRK Jazz"
+	    MSG="Hører på NRK Jazz"
 	    URL="http://lyd.nrk.no/nrk_radio_jazz_mp3_h"
 	    ;;
 	folk|folkemusikk|Folk|FOLK)
-	    MSG="Hører nå på NRK Folkemusikk"
+	    MSG="Hører på NRK Folkemusikk"
 	    URL="http://lyd.nrk.no/nrk_radio_folkemusikk_mp3_h"
 	    ;;
 	stop|stopp)
@@ -78,16 +78,17 @@ case $1 in
 	    rm $LOGFILE 2> /dev/null
 	    exit 0
 	    ;;
-    resume)
-        echo "Fortsetter avspilling"
-        MSG=$(head -n 1 $LASTPLAYED)
-        URL=$(tail -n 1 $LASTPLAYED)
+	resume)
+	    echo "Fortsetter avspilling"
+	    MSG=$(head -n 1 $LASTPLAYED)
+	    URL=$(tail -n 1 $LASTPLAYED)
         ;;
-
 	status)
 	    if [ -e $LOGFILE ]; then
-		head -n 1 $LOGFILE
-		tail -n 1 $LOGFILE | grep ICY | cut -d "'" -f 2
+	        head -n 1 $LOGFILE
+	        echo "Nå spilles: $(tail -n 1 $LOGFILE | grep -i 'icy' | sed 's/^[ ]*icy-title: //')"
+	    else
+	        echo "Ingenting spilles for øyeblikket"
 	    fi
 	    exit 0
 	    ;;
@@ -116,4 +117,4 @@ echo $URL >> $LASTPLAYED
 
 
 # Start avspilling i screen mens metadata-output sendes til loggfilen
-screen -dmS nrk bash -c "$PLAYER $URL | tee 2> $LOGFILE | grep ICY --line-buffered >> $LOGFILE"
+screen -dmS nrk bash -c "$PLAYER $URL | tee 2>> $LOGFILE | grep -i icy --line-buffered >> $LOGFILE"
