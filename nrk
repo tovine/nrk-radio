@@ -86,7 +86,7 @@ case $1 in
 	status)
 	    if [ -e $LOGFILE ]; then
 	        head -n 1 $LOGFILE
-	        echo "Nå spilles: $(tail -n 1 $LOGFILE | grep -i 'icy' | sed 's/^[ ]*icy-title: //')"
+		echo "Nå spilles: $(tail -n 1 $LOGFILE | grep -i 'icy' | sed 's/^[ ]*ICY Info: StreamTitle=//;s/;$//')"
 	    else
 	        echo "Ingenting spilles for øyeblikket"
 	    fi
