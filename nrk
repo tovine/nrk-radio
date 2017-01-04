@@ -78,13 +78,18 @@ case $1 in
 	    rm $LOGFILE 2> /dev/null
 	    exit 0
 	    ;;
-	resume)
-	    echo "Fortsetter avspilling"
-	    MSG=$(head -n 1 $LASTPLAYED)
-	    URL=$(tail -n 1 $LASTPLAYED)
-        ;;
+	resume|fortsett)
+	    if [ -s $LASTPLAYED ]; then
+	        echo "Fortsetter avspilling"
+	        MSG=$(head -n 1 $LASTPLAYED)
+	        URL=$(tail -n 1 $LASTPLAYED)
+	    else
+	        echo "Ingenting å fortsette"
+	        exit 0
+            fi
+            ;;
 	status)
-	    if [ -e $LOGFILE ]; then
+	    if [ -s $LOGFILE ]; then
 	        head -n 1 $LOGFILE
 		echo "Nå spilles: $(tail -n 1 $LOGFILE | grep -i 'icy' | sed 's/^[ ]*ICY Info: StreamTitle=//;s/;$//')"
 	    else

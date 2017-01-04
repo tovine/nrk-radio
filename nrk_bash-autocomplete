@@ -5,7 +5,7 @@
 	if [[ $COMP_CWORD > 1 ]]; then
 		COMPLETES=()
 	else
-		COMPLETES="p1 p1p p13 p2 p3 mp3 super an sport sami urort klassisk jazz folk rr rap status stopp"
+		COMPLETES="p1 p1p p13 p2 p3 mp3 super an sport sami urort klassisk jazz folk rr rap status stopp fortsett"
 	fi
 
 	COMPREPLY=( $(compgen -W "$COMPLETES" -- ${COMP_WORDS[$COMP_CWORD]}) )
